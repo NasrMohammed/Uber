@@ -24,13 +24,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="you@gmail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s94-Xm-uAK">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="rider@gmail.com" borderStyle="roundedRect" placeholder="you@gmail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s94-Xm-uAK">
                                 <rect key="frame" x="20" y="81" width="374" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="84G-1h-Kdw">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc123" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="84G-1h-Kdw">
                                 <rect key="frame" x="20" y="126" width="374" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -105,10 +105,79 @@
                         <outlet property="riderDriverSwitch" destination="tx4-LU-b8m" id="hpD-86-1lO"/>
                         <outlet property="riderLabel" destination="peM-hM-KPa" id="vdx-Gs-N6M"/>
                         <outlet property="topButton" destination="tV7-OL-ITc" id="r6V-7D-Jle"/>
+                        <segue destination="cbz-0M-ZvA" kind="presentation" identifier="riderSegue" id="bWA-47-ATU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="243" y="-22"/>
+        </scene>
+        <!--Rider View Controller-->
+        <scene sceneID="yH9-6d-DOd">
+            <objects>
+                <viewController id="jFG-Ey-wgz" customClass="RiderViewController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r6Y-gn-72B">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GNK-DZ-xMG">
+                                <rect key="frame" x="20" y="108" width="374" height="290"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="8Eb-Hk-Gx1"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4X-F8-s6m">
+                                <rect key="frame" x="165" y="403" width="84" height="30"/>
+                                <state key="normal" title="Call an Uber"/>
+                                <connections>
+                                    <action selector="callUberTapped:" destination="jFG-Ey-wgz" eventType="touchUpInside" id="kCd-af-i2V"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GNK-DZ-xMG" firstAttribute="top" secondItem="n8h-SN-8EM" secondAttribute="top" constant="20" id="DwD-zh-4xs"/>
+                            <constraint firstItem="GNK-DZ-xMG" firstAttribute="centerX" secondItem="r6Y-gn-72B" secondAttribute="centerX" id="Ou6-gJ-SCd"/>
+                            <constraint firstItem="v4X-F8-s6m" firstAttribute="centerX" secondItem="r6Y-gn-72B" secondAttribute="centerX" id="mYY-pV-iET"/>
+                            <constraint firstItem="GNK-DZ-xMG" firstAttribute="leading" secondItem="n8h-SN-8EM" secondAttribute="leading" constant="20" id="sF5-lf-iA5"/>
+                            <constraint firstItem="v4X-F8-s6m" firstAttribute="top" secondItem="GNK-DZ-xMG" secondAttribute="bottom" constant="5" id="uDL-F7-9Vq"/>
+                            <constraint firstItem="n8h-SN-8EM" firstAttribute="trailing" secondItem="GNK-DZ-xMG" secondAttribute="trailing" constant="20" id="zsR-Lw-bwo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n8h-SN-8EM"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pdx-c5-xRM">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="jPF-if-cNj">
+                            <connections>
+                                <action selector="logoutTapped:" destination="jFG-Ey-wgz" id="fW4-wK-kLt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="callAnUberButton" destination="v4X-F8-s6m" id="zne-gP-bui"/>
+                        <outlet property="map" destination="GNK-DZ-xMG" id="JQi-jV-RNO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQU-Tr-DTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2044.9275362318842" y="-22.098214285714285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Cnb-pV-oes">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cbz-0M-ZvA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jeh-ni-9e8">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jFG-Ey-wgz" kind="relationship" relationship="rootViewController" id="0Xm-6s-8up"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UNx-pX-fJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1135" y="-22"/>
         </scene>
     </scenes>
 </document>
