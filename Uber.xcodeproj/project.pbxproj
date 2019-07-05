@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D8C4D0BB5F63F3438CE8F4E /* Pods_Uber.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624232020123C23D86CC6681 /* Pods_Uber.framework */; };
+		CC4A133422CFFC2D00535C83 /* DriverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4A133322CFFC2D00535C83 /* DriverTableViewController.swift */; };
 		CC625B3322C3C7A800C88328 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC625B3222C3C7A800C88328 /* AppDelegate.swift */; };
 		CC625B3522C3C7A800C88328 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC625B3422C3C7A800C88328 /* ViewController.swift */; };
 		CC625B3822C3C7A800C88328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC625B3622C3C7A800C88328 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		13B1D475E5F2438A11C2EEAF /* Pods-Uber.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Uber.debug.xcconfig"; path = "Target Support Files/Pods-Uber/Pods-Uber.debug.xcconfig"; sourceTree = "<group>"; };
 		624232020123C23D86CC6681 /* Pods_Uber.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Uber.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC4A133322CFFC2D00535C83 /* DriverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DriverTableViewController.swift; path = /Users/nasrmohammed/Desktop/iOS_Course_2019/Uber/Uber/DriverTableViewController.swift; sourceTree = "<absolute>"; };
 		CC625B2F22C3C7A800C88328 /* Uber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Uber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC625B3222C3C7A800C88328 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC625B3422C3C7A800C88328 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				CC625B3222C3C7A800C88328 /* AppDelegate.swift */,
+				CC4A133322CFFC2D00535C83 /* DriverTableViewController.swift */,
 				CC625B3422C3C7A800C88328 /* ViewController.swift */,
 				CC625B3622C3C7A800C88328 /* Main.storyboard */,
 				CC625B4622C529CA00C88328 /* RiderViewController.swift */,
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC625B3522C3C7A800C88328 /* ViewController.swift in Sources */,
+				CC4A133422CFFC2D00535C83 /* DriverTableViewController.swift in Sources */,
 				CC625B4722C529CA00C88328 /* RiderViewController.swift in Sources */,
 				CC625B3322C3C7A800C88328 /* AppDelegate.swift in Sources */,
 			);
