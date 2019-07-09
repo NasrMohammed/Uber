@@ -8,20 +8,35 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import MapKit
 
-class DriverTableViewController: UITableViewController {
+class DriverTableViewController: UITableViewController, CLLocationManagerDelegate {
 
     var rideRequests : [DataSnapshot] = []
+    var locationManager = CLLocationManager()
+    var driverLocation = CLLocationCoordinate2D()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
         Database.database().reference().child("RideRequests").observe(.childAdded) { (snapshot) in
             self.rideRequests.append(snapshot)
             self.tableView.reloadData()
             
         }
+        
     }
 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coord = manager.location?.coordinate {
+            driverLocation = coord
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,7 +61,19 @@ class DriverTableViewController: UITableViewController {
         
         if let rideRequestDictoinary = snapshot.value as? [String:AnyObject] {
             if let email = rideRequestDictoinary["email"] as? String {
-                cell.textLabel?.text = email
+                
+                if let lat = rideRequestDictoinary["lat"] as? Double {
+                    if let lon = rideRequestDictoinary["lon"] as? Double {
+                        
+                        let driverCLLocation = CLLocation(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
+                        let riderCLLocation = CLLocation(latitude: lat, longitude: lon)
+                        
+                        let distance = driverCLLocation.distance(from: riderCLLocation) / 1000
+                        let roundDistance = round(distance * 100) / 100
+                        cell.textLabel?.text = "\(email) - \(roundDistance) km away"
+                    }
+                }
+                
             }
         }
         
