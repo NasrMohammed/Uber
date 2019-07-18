@@ -27,9 +27,11 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         Database.database().reference().child("RideRequests").observe(.childAdded) { (snapshot) in
             self.rideRequests.append(snapshot)
             self.tableView.reloadData()
-            
         }
-        
+        // Reload the table view every 3 seconds
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
+            self.tableView.reloadData()
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -61,7 +63,6 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         
         if let rideRequestDictoinary = snapshot.value as? [String:AnyObject] {
             if let email = rideRequestDictoinary["email"] as? String {
-                
                 if let lat = rideRequestDictoinary["lat"] as? Double {
                     if let lon = rideRequestDictoinary["lon"] as? Double {
                         
@@ -79,6 +80,31 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         
         return cell
     }
-    
+    // accept the request
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let snapshot = rideRequests[indexPath.row]
+
+        performSegue(withIdentifier: "acceptSegue", sender: snapshot)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let acceptVC = segue.destination as? AcceptRequestViewController {
+            
+            if let snapshot = sender as? DataSnapshot {
+                if let rideRequestDictoinary = snapshot.value as? [String:AnyObject] {
+                    if let email = rideRequestDictoinary["email"] as? String {
+                        if let lat = rideRequestDictoinary["lat"] as? Double {
+                            if let lon = rideRequestDictoinary["lon"] as? Double {
+                                acceptVC.requestEmail = email
+                                
+                                let location = CLLocationCoordinate2D(latitude: lat, longitude: lon )
+                                acceptVC.requestLocation = location
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

@@ -211,10 +211,53 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="J9M-lD-2sR" kind="show" identifier="acceptSegue" id="WHc-Vb-Yrr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ytI-pN-pGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044.9275362318842" y="646.20535714285711"/>
+            <point key="canvasLocation" x="1488" y="654"/>
+        </scene>
+        <!--Accept Request View Controller-->
+        <scene sceneID="02c-8Z-M4a">
+            <objects>
+                <viewController id="J9M-lD-2sR" customClass="AcceptRequestViewController" customModule="Uber" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eLk-uJ-Ggy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m2N-tU-5c5">
+                                <rect key="frame" x="20" y="108" width="374" height="290"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="290" id="Jl6-XQ-luU"/>
+                                </constraints>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFY-cx-2Wh">
+                                <rect key="frame" x="152.5" y="416" width="109" height="30"/>
+                                <state key="normal" title="Accept Request"/>
+                                <connections>
+                                    <action selector="acceptTapped:" destination="J9M-lD-2sR" eventType="touchUpInside" id="hdR-9s-JPw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="m2N-tU-5c5" firstAttribute="leading" secondItem="k9t-TQ-C5u" secondAttribute="leading" constant="20" id="4zj-6r-utu"/>
+                            <constraint firstItem="tFY-cx-2Wh" firstAttribute="centerX" secondItem="eLk-uJ-Ggy" secondAttribute="centerX" id="Hol-SK-CzX"/>
+                            <constraint firstItem="k9t-TQ-C5u" firstAttribute="trailing" secondItem="m2N-tU-5c5" secondAttribute="trailing" constant="20" id="M7v-bY-pCj"/>
+                            <constraint firstItem="tFY-cx-2Wh" firstAttribute="top" secondItem="m2N-tU-5c5" secondAttribute="bottom" constant="18" id="c2w-8R-ayK"/>
+                            <constraint firstItem="m2N-tU-5c5" firstAttribute="top" secondItem="k9t-TQ-C5u" secondAttribute="top" constant="20" id="dbo-Qm-2sd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="k9t-TQ-C5u"/>
+                    </view>
+                    <connections>
+                        <outlet property="map" destination="m2N-tU-5c5" id="czy-TN-weJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ts-ij-Z1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2250.7246376811595" y="659.59821428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GB2-vX-VDO">
