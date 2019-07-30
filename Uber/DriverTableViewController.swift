@@ -26,8 +26,16 @@ class DriverTableViewController: UITableViewController, CLLocationManagerDelegat
         locationManager.startUpdatingLocation()
         
         Database.database().reference().child("RideRequests").observe(.childAdded) { (snapshot) in
-            self.rideRequests.append(snapshot)
-            self.tableView.reloadData()
+            if let rideRequestDictoinary = snapshot.value as? [String:AnyObject] {
+                if let driverLat = rideRequestDictoinary["driverLat"] as? Double {
+
+                } else {
+                    self.rideRequests.append(snapshot)
+                    self.tableView.reloadData()
+                }
+            }
+
+           
         }
         
         // Reload the table view every 3 seconds

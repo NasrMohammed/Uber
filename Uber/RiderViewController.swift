@@ -18,6 +18,8 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var userLocatin = CLLocationCoordinate2D()
     var uberHasBeenCalled = false
+    var driverLocation = CLLocationCoordinate2D()
+    var driverOnTheWay = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +37,29 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                 self.callAnUberButton.setTitle("Cancel Uber", for: .normal)
                 
                 Database.database().reference().child("RideRequests").removeAllObservers()
+                
+                if let rideRequestDictoinary = snapshot.value as? [String:AnyObject] {
+                    if let driverLat = rideRequestDictoinary["driverLat"] as? Double  {
+                        if let driverLon = rideRequestDictoinary["driverLon"] as? Double {
+                            self.driverLocation = CLLocationCoordinate2D(latitude: driverLat, longitude: driverLon)
+                            self.driverOnTheWay = true
+                        }
+                    }
+                }
+
             }
         }
 
+    }
+    
+    func displayDriverAndRider() {
+        let driverCLLocation = CLLocation(latitude: driverLocation.latitude, longitude: driverLocation.longitude)
+        let riderCLLocation = CLLocation(latitude: userLocatin.latitude, longitude: userLocatin.latitude)
+        let distance = driverCLLocation.distance(from: riderCLLocation) / 1000
+        let roundDistance = round(distance * 100) / 100
+        callAnUberButton.setTitle("Your driver is \(roundDistance)km away!", for: .normal)
+        map.removeAnnotation(map!.annotations as! MKAnnotation)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -61,7 +83,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     @IBAction func callUberTapped(_ sender: Any) {
-        
+        if driverOnTheWay {
         if let email = Auth.auth().currentUser?.email {
             
             if uberHasBeenCalled {
@@ -81,7 +103,7 @@ class RiderViewController: UIViewController, CLLocationManagerDelegate {
                 callAnUberButton.setTitle("Cancel Uber", for: .normal)
             }
             
-           
+            }
         }
     }
     
